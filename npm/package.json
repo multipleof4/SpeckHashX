@@ -1,0 +1,17 @@
+{
+  "name": "speckhashx",
+  "version": "1.0.0",
+  "description": "Variable-output hash built from Speck128/256, compiled from Rust to WebAssembly. Experimental, unreviewed.",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": ["index.js", "index.d.ts", "wasm.js"],
+  "scripts": {
+    "build": "bun build.js",
+    "test": "bun test",
+    "prepack": "bun build.js"
+  },
+  "repository": "github:multipleof4/SpeckHashX",
+  "license": "CC0-1.0",
+  "keywords": ["hash", "speck", "xof", "wasm"]
+}

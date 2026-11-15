@@ -1,0 +1,6 @@
+target
+Cargo.lock
+node_modules
+npm/wasm.js
+npm/README.md
+npm/LICENSE

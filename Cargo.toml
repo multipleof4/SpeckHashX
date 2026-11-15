@@ -1,0 +1,22 @@
+[package]
+name = "speckhashx"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Variable-output hash built from Speck128/256 (Hirose double-block mode). Experimental, unreviewed."
+repository = "https://github.com/multipleof4/SpeckHashX"
+readme = "docs/README.md"
+license = "CC0-1.0"
+keywords = ["hash", "speck", "xof", "wasm"]
+categories = ["cryptography"]
+exclude = ["npm", ".github", ".gitignore"]
+
+[features]
+# C ABI exports used by the npm package (see npm/build.js)
+wasm = []
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
