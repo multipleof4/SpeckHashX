@@ -1,6 +1,6 @@
 {
   "name": "speckhashx",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Variable-output hash built from Speck128/256, compiled from Rust to WebAssembly. Experimental, unreviewed.",
   "type": "module",
   "main": "index.js",

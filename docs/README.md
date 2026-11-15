@@ -22,12 +22,13 @@ JavaScript (`npm i speckhashx`; works in Node, Bun and browsers):
 ```js
 import { hash, hex, Hasher } from 'speckhashx'
 
-hex('abc')        // '968bf582a5520b32…', 32 bytes by default
+hex('abc')        // 'f9d38f0c372695b6…', 32 bytes by default
 hash(bytes, 64)   // Uint8Array of 64 bytes
 new Hasher(32).update('ab').update('c').digest()
 ```
 
-Strings are hashed as UTF-8. Hashes of different output lengths are unrelated:
+Strings are hashed as UTF-8, and an `ArrayBuffer`, typed array or `DataView` as its bytes;
+anything else throws. Hashes of different output lengths are unrelated:
 a 16-byte hash is not the start of the 32-byte hash of the same message.
 
 ## Test vectors
@@ -37,9 +38,9 @@ Output is 32 bytes unless noted.
 | Message | Hash |
 |---|---|
 | empty | `2353e9fb3e8415144a2ba616b57448957d0a72c4003fd759e6bf96e6a3b57317` |
-| `abc` | `968bf582a5520b3292b7227175bfad8b2e86e49672651916285c9ffb25039e08` |
-| `abc`, 16-byte output | `0ac6581d4663285e152e4093de92f540` |
-| `The quick brown fox jumps over the lazy dog` | `d9e735f424a21f47c1f1edad622e07972041b7e258440e8db09edf4065d0930d` |
+| `abc` | `f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3` |
+| `abc`, 16-byte output | `dbfecc39d9de1f993d00a90030e89294` |
+| `The quick brown fox jumps over the lazy dog` | `edb6137d9032d6a8e607754a0a29e18702b578d512d119a9f249f5bb4f6ac353` |
 
 ## Build
 

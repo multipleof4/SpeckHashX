@@ -16,6 +16,9 @@ export class Hasher {
 
   update(d) {
     if (typeof d == 'string') d = te.encode(d)
+    else if (ArrayBuffer.isView(d)) d = new Uint8Array(d.buffer, d.byteOffset, d.byteLength)
+    else if (d instanceof ArrayBuffer) d = new Uint8Array(d)
+    else throw TypeError('data must be a string, ArrayBuffer or typed array')
     for (let i = 0; i < d.length; i += S) {
       const c = d.subarray(i, i + S)
       mem(p, S).set(c)

@@ -2,7 +2,7 @@
 //! Experimental and unreviewed.
 
 const IV: u128 = u128::from_le_bytes(*b"SHX/904928916087");
-/// Set in the running total on the last chunk.
+/// Set in the count of earlier bytes on the last chunk.
 const LAST: u128 = 1 << 127;
 /// Separates the second cipher call of a step from the first.
 const C: u128 = 1 << 126;
@@ -30,7 +30,7 @@ pub struct Hasher {
     g: u128,
     /// Total message bytes received.
     t: u128,
-    /// Current chunk, zero-filled past the bytes received.
+    /// The `t % 16` bytes not yet stepped, zero-filled.
     b: [u8; 16],
     n: usize,
 }
@@ -47,8 +47,9 @@ impl Hasher {
         }
     }
 
-    fn step(&mut self, m: u128, f: u128) {
-        let x = self.h ^ (self.t | f);
+    /// Mixes in chunk `m`; `t` is the message bytes before it, with `LAST` set on the last chunk.
+    fn step(&mut self, m: u128, t: u128) {
+        let x = self.h ^ t;
         let [a, b] = enc(m, self.g, [x, x ^ C]);
         (self.h, self.g) = (a ^ x, b ^ x ^ C);
     }
@@ -56,34 +57,29 @@ impl Hasher {
     /// Feeds more message bytes.
     pub fn update(&mut self, mut d: &[u8]) -> &mut Self {
         while !d.is_empty() {
-            // Bytes held in `b`. A full chunk waits here until more data shows it is not the last.
-            let mut i = if self.t == 0 {
-                0
-            } else {
-                (self.t - 1) as usize % 16 + 1
-            };
-            if i == 16 {
-                self.step(u128::from_le_bytes(self.b), 0);
-                (self.b, i) = ([0; 16], 0);
-            }
-            // Whole chunks that are followed by more data skip the buffer.
-            while i == 0 && d.len() > 16 {
-                self.t += 16;
-                self.step(u128::from_le_bytes(d[..16].try_into().unwrap()), 0);
-                d = &d[16..];
+            let i = self.t as usize % 16;
+            // Whole chunks skip the buffer.
+            while i == 0 && d.len() >= 16 {
+                self.step(u128::from_le_bytes(d[..16].try_into().unwrap()), self.t);
+                (self.t, d) = (self.t + 16, &d[16..]);
             }
             let k = d.len().min(16 - i);
             self.b[i..i + k].copy_from_slice(&d[..k]);
-            self.t += k as u128;
-            d = &d[k..];
+            (self.t, d) = (self.t + k as u128, &d[k..]);
+            if i + k == 16 {
+                self.step(u128::from_le_bytes(self.b), self.t - 16);
+                self.b = [0; 16];
+            }
         }
         self
     }
 
     /// Returns the hash of everything fed so far.
     pub fn finalize(&self) -> Vec<u8> {
-        let mut s = self.clone();
-        s.step(u128::from_le_bytes(s.b), LAST);
+        // The last chunk is the 0 to 15 bytes left over; its final byte says how many.
+        let (mut s, i) = (self.clone(), self.t % 16);
+        s.b[15] = i as u8;
+        s.step(u128::from_le_bytes(s.b), (s.t - i) | LAST);
         let mut o = vec![0; s.n];
         for (j, c) in o.chunks_mut(64).enumerate() {
             let v = enc(
@@ -171,47 +167,47 @@ mod tests {
             (
                 b"abc",
                 32,
-                "968bf582a5520b3292b7227175bfad8b2e86e49672651916285c9ffb25039e08",
+                "f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3",
             ),
-            (b"abc", 16, "0ac6581d4663285e152e4093de92f540"),
+            (b"abc", 16, "dbfecc39d9de1f993d00a90030e89294"),
             (
                 b"The quick brown fox jumps over the lazy dog",
                 32,
-                "d9e735f424a21f47c1f1edad622e07972041b7e258440e8db09edf4065d0930d",
+                "edb6137d9032d6a8e607754a0a29e18702b578d512d119a9f249f5bb4f6ac353",
             ),
-            (b"abc", 1, "20"),
+            (b"abc", 1, "b3"),
             (
                 b"abc",
                 100,
-                "1f3e16ba48dbc6de416efd6abedf3708ab825cdbd35758839ddc6e86ea53ba1aa94c50c67cf4d539a12feba39f4d3dfe\
-                 d2361f482ab444c52f0c2f1eb5542460a4a80ef0c13015c7e83cb26e208ee6d4d55bcc92cda10d8ccce60c58b573515c\
-                 a6584d2d",
+                "7a41bdac404270a33a1f3c45f868f67dc3dba424aa723eec919f414f89d6d04491b61a19876240db1cb5689f899379e1\
+                 6540aad99d5239df6c78e79a9f62385f99990fa0f238cf3e32f8d4e4f9018c9466626cae2a38066f33bb27ece2261444\
+                 11026525",
             ),
             (
                 &[0; 16],
                 32,
-                "ac92179e83147a72c08987beee6f2d31263fa89a7026b2b6b07e14137ab60c1a",
+                "bd4938adba89371630c40ed5ade8ea29f4c1c366c0f26ea17a6dac4074e4cbad",
             ),
             (
                 &[0; 17],
                 32,
-                "9148212d6bdfd432b80a0c3c026f851c5b3c3e86285f60cd0dd21a4d3775acc4",
+                "8424162ee390487cdb4e6e468a923363ea63bb89ea37b254b73bf227eae7fb4f",
             ),
             (
                 &p[..32],
                 32,
-                "c888a2d185cb581215e7aaa0f9e6cab970dc05713f8ea89724543da5138bb152",
+                "1260b1178d37c0d9477cd98d710c9e8ba0ce350786af0f8211a15a1991559ee2",
             ),
             (
                 &p[..33],
                 64,
-                "582b3398042df36e62436ca378ed3f63664a61e6a96018218f27ecb83806a99b\
-                 80f0394b65f88aa472b82c26ea254bd2c91e9d335944721dd367fc63fddfadd1",
+                "e3a90c0dce6d78767691510c890a40cf2e2ce8933729baf072f1ed3e7bfcd523\
+                 45b9a8d1b2b0c7089405e5921ff9b8102150844d8a84cac92857eff650982d44",
             ),
             (
                 &p,
                 32,
-                "bbc3edc9f53ad7af85ee7aa474275b4909ea89815ab801b9f7437b490ecb49fe",
+                "8a0d7524c6ee6ef86b6cfd7de2727ede7b74dc8c32430626c892b20380ad5427",
             ),
         ] {
             assert_eq!(hex(&hash(m, n)), o, "{} bytes -> {n}", m.len());
