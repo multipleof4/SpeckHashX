@@ -9,7 +9,7 @@ readme = "docs/README.md"
 license = "CC0-1.0"
 keywords = ["hash", "speck", "xof", "wasm"]
 categories = ["cryptography"]
-exclude = ["npm", ".github", ".gitignore"]
+exclude = ["npm", "site", ".github", ".gitignore"]
 
 [features]
 # C ABI exports used by the npm package (see npm/build.js)

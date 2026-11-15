@@ -1,6 +1,7 @@
 target
 Cargo.lock
 node_modules
+dist
 npm/wasm.js
 npm/README.md
 npm/LICENSE
