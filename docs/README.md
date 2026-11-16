@@ -25,9 +25,12 @@ JavaScript (`npm i speckhashx`; works in Node, Bun and browsers):
 import { hash, hex, Hasher } from 'speckhashx'
 
 hex('abc')        // 'f9d38f0c372695b6…', 32 bytes by default
+hex('abc', 16)    // 'dbfecc39d9de1f99…', 16 bytes
 hash(bytes, 64)   // Uint8Array of 64 bytes
 new Hasher(32).update('ab').update('c').digest()
 ```
+
+The number is the output length in bytes; in JavaScript it is optional and defaults to 32.
 
 Strings are hashed as UTF-8, and an `ArrayBuffer`, typed array or `DataView` as its bytes;
 anything else throws. Hashes of different output lengths are unrelated:
