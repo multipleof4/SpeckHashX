@@ -12,6 +12,7 @@
     "prepack": "bun build.js"
   },
   "repository": "github:multipleof4/SpeckHashX",
+  "homepage": "https://speckhashx.pages.dev",
   "license": "CC0-1.0",
   "keywords": ["hash", "speck", "xof", "wasm"]
 }
