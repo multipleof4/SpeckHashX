@@ -9,7 +9,7 @@ One Rust source produces both the Rust crate and the WebAssembly npm package.
 
 ## Use
 
-Rust (`cargo add speckhashx`):
+[Rust](https://crates.io/crates/speckhashx) (`cargo add speckhashx`):
 
 ```rust
 let h = speckhashx::hash(b"abc", 32); // Vec<u8> of 32 bytes
@@ -19,7 +19,7 @@ s.update(b"ab").update(b"c");
 assert_eq!(s.finalize(), h);
 ```
 
-JavaScript (`npm i speckhashx`; works in Node, Bun and browsers):
+[JavaScript](https://www.npmjs.com/package/speckhashx) (`npm i speckhashx`; works in Node, Bun and browsers):
 
 ```js
 import { hash, hex, Hasher } from 'speckhashx'
