@@ -1,0 +1,1 @@
+{"bytes": 7, "R": 34, "messages_log2": 32, "pairs": 110, "expected": 128.0, "sd": 11.3, "kernel_matches_reference": true, "secs": 541.8, "device": "pthread-AMD EPYC-Milan Processor"}

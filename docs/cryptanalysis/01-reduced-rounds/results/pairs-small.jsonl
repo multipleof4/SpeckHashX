@@ -1,0 +1,3 @@
+{"bytes": 5, "R": 3, "messages_log2": 24, "pairs": 6320, "expected": 128.0, "sd": 11.3, "kernel_matches_reference": true, "secs": 0.9, "device": "pthread-Intel Core Processor (Haswell, no TSX)"}
+{"bytes": 5, "R": 6, "messages_log2": 24, "pairs": 138, "expected": 128.0, "sd": 11.3, "kernel_matches_reference": true, "secs": 0.9, "device": "pthread-Intel Core Processor (Haswell, no TSX)"}
+{"bytes": 5, "R": 34, "messages_log2": 24, "pairs": 124, "expected": 128.0, "sd": 11.3, "kernel_matches_reference": true, "secs": 1.4, "device": "pthread-Intel Core Processor (Haswell, no TSX)"}

@@ -1,0 +1,7 @@
+{"mode": "step", "R": 2, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "step", "R": 3, "secs": 1.0, "found": true, "verified": true, "m1": "7b5cc74641e3845119a57dcf706bfd50", "m2": "cddbf04b8f9ee19e69329bab81f7bc83", "g": "ffffffffffffffff70d2f211e610c776", "x": "0085e29de778c6905a803a39a2199405"}
+{"mode": "step", "R": 4, "secs": 3.4, "found": true, "verified": true, "m1": "df473e4bec0c5d76041145c0279aef64", "m2": "ff5e9ad8e0841c563ef1d4dc46151e2f", "g": "f27fd0fdf1b01fd583f8dd8a71bf2c6d", "x": "3190ce138d7de29acbf09a494e6302f7"}
+{"mode": "hash", "R": 2, "secs": 0.6, "found": false, "impossible": true}
+{"mode": "hash", "R": 3, "secs": 2.1, "found": true, "verified": true, "message1": "f3fb9f10796786983915704e0ef17273b0347f68ff2fed3b642e3761f4a558f6", "message2": "f3fb9f10796786983915704e0ef17273b79fd01534bfebd9e895f8fc364b485b", "hash": "0edab5e9d32c2304026a7651f8aae4bed7d8b5e9d32c2210536a7651f8aae5b2"}
+{"mode": "hash2", "R": 2, "secs": 0.2, "found": true, "verified": true, "message1": "f943d82fefc4837aaf06a414003555ff804a1d48f215b0f48727dc04e00a503a", "message2": "b2c2710f3cae0a952ee96bebff73b1a4a323e2ef12cfe90d307df96a746aafa7", "hash": "ba44b2de050c312aa108bae53ff0090ded44b2de050c3125be08bae53ff00902"}
+{"mode": "hash2", "R": 3, "secs": 3.5, "found": true, "verified": true, "message1": "2f993b4780882dd055eb7989478060fa838a8315bcd8ca41ca8cd2c6aa4a28ac", "message2": "8fe624278e22af21cb2f05241b6b94ac1bfc4c018847048a0886b36a5718ad64", "hash": "807a54918739a69149aaf54482f0e5b5537c54918739a7c322a9f54482f0e4ff"}

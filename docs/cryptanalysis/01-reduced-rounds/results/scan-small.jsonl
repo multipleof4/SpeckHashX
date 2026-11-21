@@ -1,0 +1,9 @@
+{"R": 1, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 97800, "never_or_always": 90372, "worst_input_bit": 0, "secs": 1.4}
+{"R": 2, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 96272, "never_or_always": 74482, "worst_input_bit": 0, "secs": 1.7}
+{"R": 3, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 93927, "never_or_always": 56889, "worst_input_bit": 0, "secs": 2.2}
+{"R": 4, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 90144, "never_or_always": 36947, "worst_input_bit": 0, "secs": 2.8}
+{"R": 5, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 78943, "never_or_always": 18633, "worst_input_bit": 3, "secs": 3.6}
+{"R": 6, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 60349, "never_or_always": 8614, "worst_input_bit": 64, "secs": 3.4}
+{"R": 7, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 39465, "never_or_always": 2728, "worst_input_bit": 128, "secs": 3.6}
+{"R": 8, "log2n": 18, "max_z": 512.0, "cells_over_5_5": 21285, "never_or_always": 90, "worst_input_bit": 192, "secs": 3.8}
+{"R": 9, "log2n": 18, "max_z": 509.88, "cells_over_5_5": 9683, "never_or_always": 0, "worst_input_bit": 199, "secs": 3.9}

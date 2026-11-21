@@ -1,0 +1,6 @@
+{"R": 34, "log2n": 22, "max_z": 4.24, "cells_over_5_5": 0, "never_or_always": 0, "worst_input_bit": 350, "secs": 174.8}
+{"R": 10, "log2n": 24, "max_z": 2690.82, "cells_over_5_5": 5461, "never_or_always": 0, "worst_input_bit": 199, "secs": 245.3}
+{"R": 11, "log2n": 24, "max_z": 680.71, "cells_over_5_5": 1155, "never_or_always": 0, "worst_input_bit": 240, "secs": 264.3}
+{"R": 12, "log2n": 24, "max_z": 4.63, "cells_over_5_5": 0, "never_or_always": 0, "worst_input_bit": 217, "secs": 274.6}
+{"R": 13, "log2n": 24, "max_z": 4.22, "cells_over_5_5": 0, "never_or_always": 0, "worst_input_bit": 284, "secs": 293.3}
+{"R": 14, "log2n": 24, "max_z": 4.93, "cells_over_5_5": 0, "never_or_always": 0, "worst_input_bit": 93, "secs": 299.8}
