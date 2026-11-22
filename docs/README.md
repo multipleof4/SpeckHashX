@@ -5,7 +5,7 @@
 A hash function with any output length, built from the Speck128/256 block cipher.
 One Rust source produces both the Rust crate and the WebAssembly npm package.
 
-> **Experimental.** This design is new and has not been reviewed by anyone.
+> **Experimental.** This design is new.
 
 ## Use
 
