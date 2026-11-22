@@ -57,6 +57,14 @@ Output is 32 bytes unless noted.
 | `abc`, in base 36 | `685qrcbn2jal82oppuwq48513j85gc1pqczm0niqxoyejmijub` |
 | `abc`, in base 64 | `-dOPDDcmlbZ9XAbCVCG-rt4nnZptqUIs_s-hjmOOlvM` |
 
+## Docs
+
+- [Specification](https://github.com/multipleof4/SpeckHashX/blob/main/docs/spec.md)
+- [Output bases](https://github.com/multipleof4/SpeckHashX/blob/main/docs/base.md)
+- [Output length and security](https://github.com/multipleof4/SpeckHashX/blob/main/docs/output-length.md)
+- [Cryptanalysis](https://github.com/multipleof4/SpeckHashX/blob/main/docs/cryptanalysis/README.md)
+- [Build](https://github.com/multipleof4/SpeckHashX/blob/main/docs/build.md)
+
 ## License
 
 [CC0 1.0](../LICENSE): public domain, the same terms as Speck itself.
