@@ -1,0 +1,8 @@
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000080", "0000000000000000"], "secs": 503.1, "found": true, "verified": true, "m1": "bc15d0463d29a47a2543ea2fb9c2d687", "m2": "bc15d0463d29a47a2543ea2fb9c2d607", "g": "2558fb31722cab56ef93162e9928b589", "x": "a7a7c303e721874e4e2e17e453079790"}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000008", "0000000000000000"], "secs": 937.6, "found": true, "verified": true, "m1": "75342caa4b7504c4899acbd355b48af6", "m2": "75342caa4b7504c4899acbd355b48afe", "g": "af37bcc335d7dddd191bfc7c498bc91e", "x": "9a5b384386e06d35599335ab1f1bdb16"}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000002", "0000000000000000"], "secs": 1200.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000001", "0000000000000000"], "secs": 1200.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000040", "0000000000000000"], "secs": 1200.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000020", "0000000000000000"], "secs": 1200.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000010", "0000000000000000"], "secs": 1200.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000004", "0000000000000000"], "secs": 1200.1, "found": false}

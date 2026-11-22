@@ -1,0 +1,5 @@
+{"R": 3, "L": 15, "bytes": 32, "seed": 1, "target": "4d228872c3fd2e50feb0f578279440d846218872c3fd51320db1f57827943fa2", "secs": 0.9, "found": true, "verified": true, "message": "f5b165224a58b791df6af1d83e61cd", "same_as_secret": true}
+{"R": 4, "L": 15, "bytes": 32, "seed": 1, "target": "5f5147d128d36b91ce2ee6ad1529a714895c47d128c8ccaad72ce6ad1532286f", "secs": 18.1, "found": true, "verified": true, "message": "f5b165224a58b791df6af1d83e61cd", "same_as_secret": true}
+{"R": 3, "L": 15, "bytes": 32, "seed": 1, "target": "4d228872c3fd2e50feb0f578279440d846218872c3fd51320db1f57827943fa2", "secs": 2.4, "found": true, "verified": true, "message": "f5b165224a58b791df6af1d83e61cd", "same_as_secret": true}
+{"R": 4, "L": 15, "bytes": 32, "seed": 1, "target": "5f5147d128d36b91ce2ee6ad1529a714895c47d128c8ccaad72ce6ad1532286f", "secs": 60.5, "found": true, "verified": true, "message": "f5b165224a58b791df6af1d83e61cd", "same_as_secret": true}
+{"R": 5, "L": 15, "bytes": 32, "seed": 1, "target": "4ab29d43f96a01e501859fca32aca80df0a09d43f87e1a0884839fca33b0ab5f", "secs": 1200.2, "found": false}

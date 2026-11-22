@@ -1,0 +1,2 @@
+{"mode": "free", "R": 12, "fix": "all", "cost": 295, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 349, "secs": 80.3, "found": true, "verified": true, "m1": "cf8eee266784171c8caddc53c686b9fd", "g1": "ed2dc48de4a742ef3054c51a859fced8", "x1": "f67f1e1e25c1b5a9561e4d1e3671fd88", "m2": "cf8eee266784959c8caddc53c686b97f", "g2": "ed2dc48de4a762ef3054c51a85bb5ed8", "x2": "f67f1e1e25c1b5a9561e4d1e3671fd8a"}

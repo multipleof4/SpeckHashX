@@ -1,0 +1,8 @@
+{"R": 4, "L": 8, "bytes": 32, "seed": 2, "target": "a1bb499af0b966407ff96d56e0de10c567a3499af08ecb7bc7fb6d56e0e935ee", "secs": 1.1, "found": true, "verified": true, "message": "73a9bef499bbf4dc", "same_as_secret": true}
+{"R": 4, "L": 12, "bytes": 32, "seed": 2, "target": "9bb5d8a322915ffd71a837cc61d6180319a1d8a3229e4ab6baae37cc61d9e578", "secs": 91.3, "found": true, "verified": true, "message": "73a9bef499bbf4dc7bd2a4f2", "same_as_secret": true}
+{"R": 3, "L": 15, "bytes": 8, "seed": 2, "target": "c1d4a66e657456a6", "secs": 3.6, "found": true, "verified": true, "message": "7775fb9cf6c2ff252d8fe8fd737102", "same_as_secret": false}
+{"R": 4, "L": 8, "bytes": 32, "seed": 3, "target": "e10524ad0da17885227412d729a1c071401124ad0da203387d7212d729a2a30c", "secs": 1.2, "found": true, "verified": true, "message": "fd3feb3c9250b797", "same_as_secret": true}
+{"R": 4, "L": 12, "bytes": 32, "seed": 3, "target": "fc1062d61b915e01c4ed262d76e5b806ee0362d61b0083a49ee0262d7674fdd4", "secs": 19.6, "found": true, "verified": true, "message": "fd3feb3c9250b7974a9b528b", "same_as_secret": true}
+{"R": 4, "L": 15, "bytes": 32, "seed": 3, "target": "7951a9a65d884aa45fb04c3bc2ded3a5ad7da9a65d93ad5287ae4c3bc2c54c63", "secs": 32.7, "found": true, "verified": true, "message": "fd3feb3c9250b7974a9b528b636321", "same_as_secret": true}
+{"R": 3, "L": 15, "bytes": 8, "seed": 3, "target": "d0f099719e899337", "secs": 42.8, "found": true, "verified": true, "message": "7902b1047abdbf9c3035960f0d5527", "same_as_secret": false}
+{"R": 4, "L": 15, "bytes": 32, "seed": 2, "target": "0b5263c7fd3ccbffa81bee6c79612a89044763c7fd3bde3e6f1cee6c796637d8", "secs": 1200.1, "found": false}

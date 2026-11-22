@@ -1,0 +1,128 @@
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000040"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000080"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000002"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000008"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000010"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000001"], "secs": 1.4, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000004"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000020"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000010", "0000000000000000"], "secs": 180.0, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000020", "0000000000000000"], "secs": 180.0, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000040", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000080", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000002", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000004", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000001", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000008", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000200", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000100"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000100", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000200"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000400", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000800", "0000000000000000"], "secs": 180.0, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000400"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000000800"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000080000"], "secs": 129.4, "found": true, "verified": true, "m1": "be1cb3542fcfbf5828c154394bd0323c", "m2": "be1cb3542fc7bf5828c154394bd0323c", "g": "7ffff820e6f9e84c8a2ed915d8d7e638", "x": "0bdcb900a0d81ec3acf25add98dd3c07"}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000001000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000001000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000002000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000002000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000004000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000008000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000008000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000004000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000040000", "0000000000000000"], "secs": 180.0, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000010000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000010000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000020000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000020000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000080000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000040000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000008000000"], "secs": 109.2, "found": true, "verified": true, "m1": "abffe865bf47843f405400179a44fd90", "m2": "abffe865b747843f405400179a44fd90", "g": "600765aef231453594e76016ad1a9015", "x": "77a0719aef7fb8e8779f50e7fa96c4b9"}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000100000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000100000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000200000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000200000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000800000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000400000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000001000000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000000400000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000800000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000080000000"], "secs": 0.6, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000080000000", "0000000000000000"], "secs": 0.8, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000100000000", "0000000000000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000100000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000002000000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000002000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000001000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000004000000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000004000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000008000000", "0000000000000000"], "secs": 180.0, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000200000000", "0000000000000000"], "secs": 0.6, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000001000000000"], "secs": 0.7, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000800000000"], "secs": 0.8, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000400000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000800000000", "0000000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000400000000", "0000000000000000"], "secs": 1.4, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000004000000000", "0000000000000000"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000200000000"], "secs": 1.6, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000002000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000008000000000"], "secs": 0.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000001000000000", "0000000000000000"], "secs": 1.7, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000004000000000"], "secs": 1.2, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000008000000000", "0000000000000000"], "secs": 1.3, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000010000000000", "0000000000000000"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000040000000000", "0000000000000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000002000000000", "0000000000000000"], "secs": 2.3, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000010000000000"], "secs": 1.4, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000040000000000"], "secs": 1.4, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000100000000000", "0000000000000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000020000000000", "0000000000000000"], "secs": 1.8, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000080000000000", "0000000000000000"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000080000000000"], "secs": 1.3, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000020000000000"], "secs": 2.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000200000000000", "0000000000000000"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000200000000000"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000400000000000", "0000000000000000"], "secs": 1.3, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000100000000000"], "secs": 1.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000400000000000"], "secs": 1.4, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000800000000000"], "secs": 1.3, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0002000000000000", "0000000000000000"], "secs": 1.3, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000800000000000", "0000000000000000"], "secs": 1.6, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0001000000000000", "0000000000000000"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0001000000000000"], "secs": 1.4, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0004000000000000", "0000000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0008000000000000", "0000000000000000"], "secs": 1.2, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0002000000000000"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0008000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0004000000000000"], "secs": 1.5, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0010000000000000", "0000000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0020000000000000", "0000000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0020000000000000"], "secs": 1.2, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0010000000000000"], "secs": 1.3, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0080000000000000"], "secs": 0.8, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0040000000000000"], "secs": 1.2, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0080000000000000", "0000000000000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0100000000000000", "0000000000000000"], "secs": 1.2, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0100000000000000"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0200000000000000", "0000000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0400000000000000"], "secs": 0.7, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0200000000000000"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0400000000000000", "0000000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0800000000000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0800000000000000", "0000000000000000"], "secs": 1.1, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["1000000000000000", "0000000000000000"], "secs": 1.2, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "1000000000000000"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "2000000000000000"], "secs": 1.0, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "8000000000000000"], "secs": 0.9, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "4000000000000000"], "secs": 1.6, "found": false, "impossible": true}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["8000000000000000", "0000000000000000"], "secs": 34.4, "found": true, "verified": true, "m1": "b8096058f90ea6f886eab69fa7058e55", "m2": "b8096058f90ea6f806eab69fa7058e55", "g": "d52ba1e40e6d7299fd6f055d93f1cc62", "x": "30eb18002855454b74a39fce7b8e5cc9"}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0040000000000000", "0000000000000000"], "secs": 44.3, "found": true, "verified": true, "m1": "28be6fc5631372f56ab2ac903a9ccd7f", "m2": "28be6fc5631372f56af2ac903a9ccd7f", "g": "1bb57ce96b40d701cc2af4233f5c6e74", "x": "a8bbc364c6fa3d9155739cbc4bee8f49"}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000010000000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000010000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["4000000000000000", "0000000000000000"], "secs": 151.1, "found": true, "verified": true, "m1": "c64a0dd1d3d575757d3ab5f22e2c96b3", "m2": "c64a0dd1d3d575753d3ab5f22e2c96b3", "g": "4beedc4ed1f7b8af3cbe16c8a3ec1e13", "x": "ffec66c161b685918e001e0057779845"}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000020000000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000020000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000040000000", "0000000000000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["0000000000000000", "0000000040000000"], "secs": 180.1, "found": false}
+{"mode": "step", "R": 5, "fix": "in", "dm": ["2000000000000000", "0000000000000000"], "secs": 180.1, "found": false}

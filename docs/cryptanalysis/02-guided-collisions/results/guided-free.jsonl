@@ -1,0 +1,5 @@
+{"mode": "free", "R": 7, "fix": "all", "cost": 74, "secs": 0.3, "found": true, "verified": true, "m1": "0207c67813e4c503ebfc8cc5a373bfbe", "g1": "579fac4c057c1dde179be700b858e0a9", "x1": "77d241c003ec0b7f60b13b840dd4ee52", "m2": "0207c67813e4c113ebfc8cc5a373bfb2", "g2": "579fac4c057c194e179be700b85cf0b9", "x2": "77d241c003ec0b7f60b13b840dd4ee56"}
+{"mode": "free", "R": 8, "fix": "all", "cost": 89, "secs": 0.4, "found": true, "verified": true, "m1": "4ce7d2605b62a79a8bcd0d3722a4e881", "g1": "97d953389c94165ace3e9a6fddb0e60e", "x1": "3cb0bfffd831b6bd6feb80808f1b4a17", "m2": "cce7d2605b62839a8b4d0d3722a4e885", "g2": "97d953389c94165ace3e9a6fddb0e62a", "x2": "bcb0bfffd831b63defeb80808f1b4a17"}
+{"mode": "free", "R": 9, "fix": "all", "cost": 132, "secs": 0.1, "found": false, "impossible": true}
+{"mode": "free", "R": 9, "fix": "key", "cost": 132, "secs": 0.1, "found": false, "impossible": true}
+{"mode": "free", "R": 9, "fix": "in", "cost": 132, "secs": 900.1, "found": false}

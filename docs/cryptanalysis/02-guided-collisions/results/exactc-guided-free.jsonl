@@ -1,0 +1,28 @@
+{"mode": "free", "R": 11, "fix": "all", "cost": 424, "secs": 0.4, "found": true, "verified": true, "m1": "6ec763c2042686064fe5facd510aea20", "g1": "5417e5838bd843235416c41acc758f66", "x1": "5e304b8c2d7d1777609f8ad49d94691d", "m2": "6ec763c2042686064fe5facd510aea20", "g2": "5417e5838bd843235416c41acc758f66", "x2": "1e304b8c2d7d1777609f8ad49d94691d"}
+{"mode": "free", "R": 12, "fix": "all", "cost": 426, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 468, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 436, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 461, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 465, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 351, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 480, "secs": 900.1, "found": false}
+{"mode": "free", "R": 12, "fix": "all", "cost": 475, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 478, "secs": 0.3, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 412, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 425, "secs": 0.3, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 387, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 430, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 447, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 457, "secs": 1.0, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 475, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 384, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 454, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 470, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 423, "secs": 0.4, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 407, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 395, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 468, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 475, "secs": 1.5, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 480, "secs": 900.1, "found": false}
+{"mode": "free", "R": 12, "fix": "all", "cost": 479, "secs": 0.2, "found": false, "impossible": true}
+{"mode": "free", "R": 12, "fix": "all", "cost": 445, "secs": 0.3, "found": false, "impossible": true}

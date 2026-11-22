@@ -17,36 +17,41 @@ compared with 34, is the margin.
 
 ## Where things stand
 
-| Attack | Breaks | Out of |
-|---|---|---|
-| Two messages with the same hash | 3 rounds | 34 |
-| Two chunks with the same step output, from a state the attacker picks | 5 rounds | 34 |
-| Two step inputs with the same step output, from two different states | 6 rounds | 34 |
-| A flipped input bit that still shows in the output | 11 rounds | 34 |
-| Statistical tests of the full hash | none failed | |
+| Attack | Breaks | Out of | From |
+|---|---|---|---|
+| Two messages with the same hash | 3 rounds | 34 | [01](01-reduced-rounds/README.md) |
+| A message with a given hash | 4 rounds | 34 | [03](03-preimages/README.md) |
+| Two chunks with the same step output, from a state the attacker picks | 5 rounds | 34 | [01](01-reduced-rounds/README.md), [02](02-guided-collisions/README.md) |
+| Two step inputs with the same step output, from two different states | 12 rounds | 34 | [02](02-guided-collisions/README.md) |
+| A flipped input bit that still shows in the output | 11 rounds | 34 | [01](01-reduced-rounds/README.md) |
+| Statistical tests of the full hash | none failed | | [01](01-reduced-rounds/README.md) |
 
-Only the first row is an attack on the hash itself. The next two give the attacker control of the hash's inner state,
+Only the first two rows are attacks on the hash itself. The next two give the attacker control of the hash's inner state,
 which a real attacker does not have. Attacks of this kind are a standard way to measure a hash's margin.
 
-These are the attacks automated tools found in under an hour of computing. They do not show where dedicated attacks would stop.
-All of them come from [analysis 01](01-reduced-rounds/README.md).
+These are the attacks automated tools found in a few hours of computing. They do not show where dedicated attacks would stop.
+
+[02](02-guided-collisions/README.md) found that the trail costs 01 gives for message-only differences belong to trails
+that cannot happen, because the two cipher calls of a step cannot both follow them. 01's lower bounds still hold.
 
 ## Analyses
 
 | # | When | What was tried |
 |---|---|---|
 | [01](01-reduced-rounds/README.md) | November 2026 | A first look: collisions found by a SAT solver, differential trails, bit-flip statistics, and collision counts on short outputs of the full hash. |
+| [02](02-guided-collisions/README.md) | November 2026 | Collisions found by a SAT solver given a hint: a trail or a message difference. Which trails the two cipher calls of a step can follow. |
+| [03](03-preimages/README.md) | November 2026 | Preimages found by a SAT solver, for messages of 8 to 15 bytes. |
 
 ## Open targets
 
 Each of these would be new. If you reach one, please open an issue.
 
-1. Two messages with the same 4-round hash.
-2. A 6-round step collision from one chosen state, or a 7-round one from two different states.
-3. A bias in the step output at 12 rounds or more.
-4. The cheapest free-start trail at 5 rounds (between 2²² and 2²⁵) and at 6 rounds (between 2²⁰ and 2⁶⁰).
-5. Whether the dependence between the two cipher calls of a step, measured in analysis 01, helps an attacker at more rounds.
-6. Anything on preimages, or by rotational, boomerang, linear or algebraic methods. None of these has been tried.
+1. Two messages with the same 4-round hash. In 02 no single flipped message bit worked from a random state.
+2. A message with a given 5-round hash.
+3. A 6-round step collision from one chosen state, or a 13-round one from two different states.
+4. A bias in the step output at 12 rounds or more.
+5. A trail model that accounts for both cipher calls of a step. In 02, every 4-round message-only trail it gave was impossible with both calls.
+6. Anything by rotational, boomerang, linear or algebraic methods. None of these has been tried.
 
 ## Layout
 

@@ -1,0 +1,3 @@
+{"R": 5, "L": 8, "bytes": 32, "seed": 1, "target": "4b0ee71390abbb515ee2a874a090d3c27a9ee71397bba98251f2a874a7987949", "secs": 3600.1, "found": false}
+{"R": 5, "L": 12, "bytes": 32, "seed": 1, "target": "6126e96e51fae4563fe059e83f64a0c7fa01e96e56f27ac3899b59e83864f69b", "secs": 3600.1, "found": false}
+{"R": 5, "L": 15, "bytes": 32, "seed": 1, "target": "4ab29d43f96a01e501859fca32aca80df0a09d43f87e1a0884839fca33b0ab5f", "secs": 3600.1, "found": false}
