@@ -1,6 +1,6 @@
 # Cryptanalysis
 
-<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="96" alt="An octopus wiggling its arms">
+<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="64" alt="An octopus wiggling its arms">
 
 Attempts to break SpeckHashX, kept in one place so that anyone can check them, repeat them and go further.
 

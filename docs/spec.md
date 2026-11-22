@@ -1,6 +1,6 @@
 # Specification
 
-<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="96" alt="An octopus wiggling its arms">
+<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="64" alt="An octopus wiggling its arms">
 
 This page defines SpeckHashX: everything needed to compute it without reading the source.
 
@@ -19,7 +19,7 @@ SpeckHashX takes a message of `L` bytes and an output length of `n` bytes, and r
 
 ## The cipher
 
-<img src="https://vibegif.direct-img.link/padlock/unlock.webp" width="96" alt="A key turning in a padlock">
+<img src="https://vibegif.direct-img.link/padlock/unlock.webp" width="64" alt="A key turning in a padlock">
 
 `E(a, b, v)` is Speck128/256 ([paper](https://eprint.iacr.org/2013/404)): it encrypts the word `v` under the key made of the words `a` and `b`.
 
@@ -48,7 +48,7 @@ ciphertext  438f189c8db4ee4e3ef5c00504010941
 
 ## Constants
 
-<img src="https://vibegif.direct-img.link/clock/tick.webp" width="96" alt="An alarm clock ticking">
+<img src="https://vibegif.direct-img.link/clock/tick.webp" width="64" alt="An alarm clock ticking">
 
 | Name | Value |
 |---|---|
@@ -76,7 +76,7 @@ t[q] = 16·q + LAST
 
 ## Steps
 
-<img src="https://vibegif.direct-img.link/gear/turn.webp" width="96" alt="Two gears turning against each other">
+<img src="https://vibegif.direct-img.link/gear/turn.webp" width="64" alt="Two gears turning against each other">
 
 The state is two words, `h` and `g`. It starts from `IV` and the output length, and takes one step per chunk:
 
@@ -92,7 +92,7 @@ Both cipher calls of a step use the same key: the `g` in it is the value from be
 
 ## Output
 
-<img src="https://vibegif.direct-img.link/spring/boing.webp" width="96" alt="A spring toy stretching up and squashing down">
+<img src="https://vibegif.direct-img.link/spring/boing.webp" width="64" alt="A spring toy stretching up and squashing down">
 
 The final state is the key, and a block number is the input:
 
@@ -152,7 +152,7 @@ def shx(m, n):
 
 ## Test vectors
 
-<img src="https://vibegif.direct-img.link/check/done.webp" width="96" alt="A check mark drawing itself in a badge">
+<img src="https://vibegif.direct-img.link/check/done.webp" width="64" alt="A check mark drawing itself in a badge">
 
 Chunks, `h` and `g` are shown as their 16 bytes; `h` and `g` are the state after the step for the chunk above them.
 

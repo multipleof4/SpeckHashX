@@ -1,6 +1,6 @@
 # SpeckHashX
 
-<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="96" alt="An octopus wiggling its arms">
+<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="64" alt="An octopus wiggling its arms">
 
 A hash function with any output length, built from the Speck128/256 block cipher.
 One Rust source produces both the Rust crate and the WebAssembly npm package.
