@@ -1,6 +1,6 @@
-# Specification
+<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="64" align="right" alt="An octopus wiggling its arms">
 
-<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="64" alt="An octopus wiggling its arms">
+# Specification
 
 This page defines SpeckHashX: everything needed to compute it without reading the source.
 
