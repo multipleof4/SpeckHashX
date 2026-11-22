@@ -17,9 +17,9 @@ SpeckHashX takes a message of `L` bytes and an output length of `n` bytes, and r
 - Bytes and words convert in little-endian order: the first of the 16 bytes holds the lowest 8 bits of the word.
 - `‖` joins byte strings.
 
-## The cipher
+<img src="https://vibegif.direct-img.link/padlock/unlock.webp" width="64" align="right" alt="A key turning in a padlock">
 
-<img src="https://vibegif.direct-img.link/padlock/unlock.webp" width="64" alt="A key turning in a padlock">
+## The cipher
 
 `E(a, b, v)` is Speck128/256 ([paper](https://eprint.iacr.org/2013/404)): it encrypts the word `v` under the key made of the words `a` and `b`.
 
@@ -46,9 +46,9 @@ plaintext   706f6f6e65722e20496e2074686f7365
 ciphertext  438f189c8db4ee4e3ef5c00504010941
 ```
 
-## Constants
+<img src="https://vibegif.direct-img.link/clock/tick.webp" width="64" align="right" alt="An alarm clock ticking">
 
-<img src="https://vibegif.direct-img.link/clock/tick.webp" width="64" alt="An alarm clock ticking">
+## Constants
 
 | Name | Value |
 |---|---|
@@ -74,9 +74,9 @@ t[j] = 16·j           for j < q
 t[q] = 16·q + LAST
 ```
 
-## Steps
+<img src="https://vibegif.direct-img.link/gear/turn.webp" width="64" align="right" alt="Two gears turning against each other">
 
-<img src="https://vibegif.direct-img.link/gear/turn.webp" width="64" alt="Two gears turning against each other">
+## Steps
 
 The state is two words, `h` and `g`. It starts from `IV` and the output length, and takes one step per chunk:
 
@@ -90,9 +90,9 @@ for j = 0 … q:
 
 Both cipher calls of a step use the same key: the `g` in it is the value from before the step.
 
-## Output
+<img src="https://vibegif.direct-img.link/spring/boing.webp" width="64" align="right" alt="A spring toy stretching up and squashing down">
 
-<img src="https://vibegif.direct-img.link/spring/boing.webp" width="64" alt="A spring toy stretching up and squashing down">
+## Output
 
 The final state is the key, and a block number is the input:
 
@@ -150,9 +150,9 @@ def shx(m, n):
     return b"".join(E(h, g, j).to_bytes(16, "little") for j in range(-(-n // 16)))[:n]
 ```
 
-## Test vectors
+<img src="https://vibegif.direct-img.link/check/done.webp" width="64" align="right" alt="A check mark drawing itself in a badge">
 
-<img src="https://vibegif.direct-img.link/check/done.webp" width="64" alt="A check mark drawing itself in a badge">
+## Test vectors
 
 Chunks, `h` and `g` are shown as their 16 bytes; `h` and `g` are the state after the step for the chunk above them.
 
