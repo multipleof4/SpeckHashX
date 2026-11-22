@@ -16,7 +16,7 @@ from ref import IV, shx, step
 
 N = 64
 KISSAT = os.environ.get("KISSAT", "kissat")
-WORK = Path(os.environ.get("WORK", Path(__file__).parent.parent / ".work"))
+WORK = Path(os.environ.get("WORK", Path(__file__).parent / ".work"))
 T = 1  # the variable that is always true
 
 

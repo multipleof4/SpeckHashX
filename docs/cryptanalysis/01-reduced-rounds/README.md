@@ -40,7 +40,7 @@ the outputs equal. Every answer was recomputed with the reference before it was 
 Two messages with the same 3-round hash:
 
 ```sh
-cd docs/cryptanalysis/tools
+cd docs/cryptanalysis/01-reduced-rounds/tools
 python ref.py f3fb9f10796786983915704e0ef17273b0347f68ff2fed3b642e3761f4a558f6 32 3
 python ref.py f3fb9f10796786983915704e0ef17273b79fd01534bfebd9e895f8fc364b485b 32 3
 ```
@@ -128,8 +128,31 @@ The full hash behaves as chance predicts, and the test does catch a weak version
   32-core machine (AMD EPYC Milan, 61 GB) for 48 minutes. Everything else ran on a 4-core virtual machine.
 - No GPU was used: none was in stock. The OpenCL code ran on the CPU.
 
+The code is in [`tools/`](tools/). Every script takes the number of Speck rounds as a parameter,
+so the same code attacks a weakened hash and checks the real one (34 rounds).
+
+| File | What it does |
+|---|---|
+| `ref.py` | The hash as in [spec.md](../../spec.md), with the round count as a parameter. Everything else is checked against it. |
+| `collide.py` | Asks a SAT solver for two actual inputs that collide. |
+| `trails.py` | Asks a SAT solver for the cheapest differential trail, and proves that none is cheaper. |
+| `shx.cl`, `run.py` | Experiments that run the hash billions of times, on a GPU or on all CPU cores. |
+
+Setup, from `tools/`:
+
 ```sh
-cd docs/cryptanalysis/tools           # setup: see tools/README.md
+uv venv .venv && . .venv/bin/activate
+uv pip install python-sat numpy pyopencl pocl-binary-distribution
+git clone --depth 1 https://github.com/arminbiere/kissat .work/kissat && (cd .work/kissat && ./configure && make)
+export KISSAT=$PWD/.work/kissat/build/kissat
+```
+
+`pocl-binary-distribution` runs the OpenCL code on the CPU and needs `gcc`. With a GPU and its driver, `run.py` uses the GPU.
+`python run.py check` tests the OpenCL code against `ref.py`. The top of each file says what its arguments mean.
+
+The runs behind the results:
+
+```sh
 python collide.py hash 4 2658 7       # mode, rounds, seconds, copies; also hash2 4, step 5, step 6, free 1 to 7
 python trails.py f 5 664 4            # also f 3, f 4, f 6, and c 2 to c 4
 python run.py hunt trail.json 31 any  # a trail from trails.py, 2^31 pairs

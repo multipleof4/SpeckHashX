@@ -50,12 +50,16 @@ Each of these would be new. If you reach one, please open an issue.
 
 ## Layout
 
-- `tools/`: code shared by the analyses, with a reference of the hash that takes the round count as a parameter. See [tools/README.md](tools/README.md).
-- `NN-name/`: one folder per analysis. Its `README.md` says what was asked, how it was tested, what came out and what it does not show. Its `results/` holds the raw output.
+One folder per analysis, `NN-name/`, and each one stands alone:
+
+- `README.md` says what was asked, how it was tested, what came out and what it does not show.
+- `tools/` holds the code that produced the results.
+- `results/` holds the raw output.
 
 ## Adding an analysis
 
-1. Make the next numbered folder, with a `README.md` and a `results/` folder.
-2. Put code that later analyses can reuse in `tools/`, and one-off scripts in the analysis folder.
+1. Make the next numbered folder, with a `README.md`, a `tools/` folder and a `results/` folder.
+2. Copy any code you want to reuse from an earlier analysis into the new `tools/` and change it there.
+   Never change an earlier analysis's code: its results have to keep matching it.
 3. Say who did the work and with what, and give the commands that reproduce it.
 4. Add a row to **Analyses**, and update **Where things stand** and **Open targets** if a number moved.

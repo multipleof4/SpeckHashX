@@ -17,7 +17,7 @@ from pysat.card import CardEnc, EncType
 
 N = 64
 KISSAT = os.environ.get("KISSAT", "kissat")
-WORK = Path(os.environ.get("WORK", Path(__file__).parent.parent / ".work"))
+WORK = Path(os.environ.get("WORK", Path(__file__).parent / ".work"))
 
 
 def rol(v, r): return [v[(j - r) % N] for j in range(N)]
