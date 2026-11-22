@@ -74,7 +74,7 @@ A converter prints the same number without those zeros.
 Base 64 is URL-safe base64 as in [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648):
 the letters, the digits, `-` and `_`, with no `=` at the end.
 It packs the bytes in order, three bytes to four characters, so any base64url decoder gives the bytes back.
-Its length is fixed too.
+It follows the same rule as the other bases: its length is fixed, and zero bits at the front show as `A`, its zero digit.
 
 Base 32 is not that kind of encoding: it is the number in base 32, in the digits `0` to `9` and `a` to `v`,
 not the Base32 of RFC 4648.

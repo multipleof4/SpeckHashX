@@ -130,7 +130,7 @@ The words inside the hash are little-endian; the text is big-endian so that it m
 
 ### Base 64
 
-Base 64 is `base64url` from section 5 of [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648), without the `=` padding.
+Base 64 is `base64url` from section 5 of [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648), with no `=` at the end.
 
 ## Limits
 

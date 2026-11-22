@@ -9,7 +9,7 @@ export interface Hash extends Uint8Array {
    * The bytes as text in base `r`.
    * Bases 2 to 36 give them as one big-endian number in the digits `0-9a-z`, leading zeros kept;
    * in a base other than 2, 4, 8, 16 and 32 the hash can be at most 1,024 bytes.
-   * Base 64 is unpadded base64url.
+   * Base 64 is base64url with no `=` at the end.
    */
   base(r: number): string
 }

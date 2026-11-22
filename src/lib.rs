@@ -141,7 +141,7 @@ fn digits(b: &[u8], r: u64) -> Vec<u8> {
 /// `b` as text in base `r`.
 ///
 /// Bases 2 to 36 give `b` as one big-endian number in the digits `0-9a-z`, with as many digits as
-/// the largest value of that length needs, so base 16 is the usual hex. Base 64 is unpadded base64url.
+/// the largest value of that length needs, so base 16 is the usual hex. Base 64 is base64url with no `=` at the end.
 ///
 /// # Panics
 ///
@@ -360,7 +360,7 @@ mod tests {
         assert_eq!(base(&[0, 0, 5], 10), "00000005");
         assert_eq!(base(&[0, 0, 5], 2), "000000000000000000000101");
         assert_eq!(base(&[255], 8), "377");
-        // The test vectors of RFC 4648, without padding.
+        // The test vectors of RFC 4648, with no `=` at the end.
         for (m, o) in [
             ("", ""),
             ("f", "Zg"),

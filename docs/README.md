@@ -42,12 +42,7 @@ Strings are hashed as UTF-8, and an `ArrayBuffer`, typed array or `DataView` as 
 anything else throws. Hashes of different output lengths are unrelated:
 a 16-byte hash is not the start of the 32-byte hash of the same message.
 
-`base` takes 2 to 36, or 64. Bases 2 to 36 write the hash as one number in the digits `0-9a-z`,
-so 16 is hex and 10 is decimal; 64 is URL-safe base64 without padding.
-Lengths, byte order and speed are in [base.md](https://github.com/multipleof4/SpeckHashX/blob/main/docs/base.md);
-the exact rules are in the [specification](https://github.com/multipleof4/SpeckHashX/blob/main/docs/spec.md#text).
-
-Before version 1.2.0 the npm package had `hash(d, n)` and `hex(d, n)`; they are now `shx(d, n)` and `shx(d, n).hex()`.
+`base` takes 2 to 36, or 64. `hex` is base 16.
 
 ## Test vectors
 
