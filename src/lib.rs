@@ -100,9 +100,91 @@ pub fn hash(m: &[u8], n: usize) -> Vec<u8> {
     Hasher::new(n).update(m).finalize()
 }
 
+/// Longest input, in bytes, that `base` takes in a base other than 2, 4, 8, 16, 32 and 64.
+const MAX: usize = 1024;
+const B64: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+
+/// Digits of the big-endian number `b` in base `r`, lowest first, without leading zeros.
+fn digits(b: &[u8], r: u64) -> Vec<u8> {
+    // Each pass divides by `p`, the largest power of `r` that fits in 32 bits, and gives `k` digits.
+    let k = (1..).take_while(|&k| r.pow(k) <= 1 << 32).count();
+    let (p, mut i, mut o) = (r.pow(k as u32), 0, vec![]);
+    let mut n: Vec<u64> = b
+        .rchunks(4)
+        .rev()
+        .map(|c| c.iter().fold(0, |a, &v| a << 8 | v as u64))
+        .collect();
+    loop {
+        // Skip the words already divided down to zero.
+        while n.get(i) == Some(&0) {
+            i += 1;
+        }
+        if i == n.len() {
+            break;
+        }
+        let mut c = 0;
+        for v in &mut n[i..] {
+            c = c << 32 | *v;
+            (*v, c) = (c / p, c % p);
+        }
+        for _ in 0..k {
+            o.push((c % r) as u8);
+            c /= r;
+        }
+    }
+    while o.last() == Some(&0) {
+        o.pop();
+    }
+    o
+}
+
+/// `b` as text in base `r`.
+///
+/// Bases 2 to 36 give `b` as one big-endian number in the digits `0-9a-z`, with as many digits as
+/// the largest value of that length needs, so base 16 is the usual hex. Base 64 is unpadded base64url.
+///
+/// # Panics
+///
+/// If `r` is not 2 to 36 or 64, or if `b` is over 1,024 bytes in a base other than 2, 4, 8, 16, 32 and 64.
+pub fn base(b: &[u8], r: u32) -> String {
+    if r == 64 {
+        return b
+            .chunks(3)
+            .flat_map(|c| {
+                let v = c.iter().fold(0, |a, &x| a << 8 | x as u32) << (24 - 8 * c.len());
+                (0..=c.len()).map(move |i| B64[(v >> (18 - 6 * i) & 63) as usize] as char)
+            })
+            .collect();
+    }
+    assert!((2..=36).contains(&r), "base must be 2 to 36, or 64");
+    let mut o = vec![];
+    if r.is_power_of_two() {
+        // A digit is a whole number of bits: take them from the low end.
+        let (k, mut a, mut c) = (r.trailing_zeros(), 0, 0);
+        for &v in b.iter().rev() {
+            (a, c) = (a | (v as u32) << c, c + 8);
+            while c >= k {
+                o.push((a % r) as u8);
+                (a, c) = (a / r, c - k);
+            }
+        }
+        if c > 0 {
+            o.push(a as u8);
+        }
+    } else {
+        assert!(b.len() <= MAX, "this base takes at most {MAX} bytes");
+        o = digits(b, r as u64);
+        o.resize(digits(&vec![255; b.len()], r as u64).len(), 0);
+    }
+    o.iter()
+        .rev()
+        .map(|&c| char::from_digit(c as u32, r).unwrap())
+        .collect()
+}
+
 #[cfg(feature = "wasm")]
 mod wasm {
-    use super::Hasher;
+    use super::{Hasher, base};
     use std::slice;
 
     #[unsafe(no_mangle)]
@@ -134,6 +216,14 @@ mod wasm {
     #[unsafe(no_mangle)]
     unsafe extern "C" fn shx_drop(h: *mut Hasher) {
         drop(unsafe { Box::from_raw(h) })
+    }
+
+    /// Returns the text of `base` after its 4-byte length; release all of it with `shx_free`.
+    #[unsafe(no_mangle)]
+    unsafe extern "C" fn shx_base(p: *const u8, n: usize, r: u32) -> *mut u8 {
+        let s = base(unsafe { slice::from_raw_parts(p, n) }, r);
+        let v = [&(s.len() as u32).to_le_bytes()[..], s.as_bytes()].concat();
+        Box::into_raw(v.into_boxed_slice()) as _
     }
 }
 
@@ -212,6 +302,115 @@ mod tests {
         ] {
             assert_eq!(hex(&hash(m, n)), o, "{} bytes -> {n}", m.len());
         }
+    }
+
+    /// Answers from Python's big integers and `base64`.
+    #[test]
+    fn bases() {
+        let h = hash(b"abc", 32);
+        for (r, o) in [
+            (
+                2,
+                "1111100111010011100011110000110000110111001001101001010110110110011111010101110000000110110000100\
+                 1010100001000011011111010101110110111100010011110011101100110100110110110101001010000100010110011\
+                 11111011001111101000011000111001100011100011101001011011110011",
+            ),
+            (
+                8,
+                "17472343606067115126663725600660452041575273361171663233324502131773175030714343513363",
+            ),
+            (
+                10,
+                "112999691306956569769269184981788655759217413943854614658490461780486682220275",
+            ),
+            (
+                16,
+                "f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3",
+            ),
+            (32, "1uejhs63e9klmpulo1m2aggrtbmu4uepkrd988mftjt1hphot5nj"),
+            (36, "685qrcbn2jal82oppuwq48513j85gc1pqczm0niqxoyejmijub"),
+            (64, "-dOPDDcmlbZ9XAbCVCG-rt4nnZptqUIs_s-hjmOOlvM"),
+        ] {
+            assert_eq!(base(&h, r), o, "base {r}");
+        }
+        assert_eq!(
+            base(&hash(b"abc", 100), 36),
+            "6srhq96um6obb88d2x46anh0xzypwbkemsemwdwd2lnt3olknhi2xr2o93lh2xh7m8rwcajll5wesmrimhez8hfqxsherdi2\
+             8ilxlp34e234lm6t1jbavyn9oao46f67eziuj6g35x0ik033rjttcq6z2g5"
+        );
+        // Leading zeros stay.
+        for (m, n, r, o) in [
+            (
+                &b""[..],
+                32,
+                10,
+                "015979212887220042755496585023260168943665753206110443921945613077242631779095",
+            ),
+            (
+                b"",
+                32,
+                36,
+                "0vp4xr6nktgf2khkk0szu4la2ak25np163qt437hvy1sj6ls0n",
+            ),
+            (b"abc", 5, 3, "00201121220001201110210221"),
+            (b"abc", 5, 7, "020555203250446"),
+        ] {
+            assert_eq!(base(&hash(m, n), r), o, "{n} bytes in base {r}");
+        }
+        assert_eq!(base(&[0, 0, 5], 10), "00000005");
+        assert_eq!(base(&[0, 0, 5], 2), "000000000000000000000101");
+        assert_eq!(base(&[255], 8), "377");
+        // The test vectors of RFC 4648, without padding.
+        for (m, o) in [
+            ("", ""),
+            ("f", "Zg"),
+            ("fo", "Zm8"),
+            ("foo", "Zm9v"),
+            ("foob", "Zm9vYg"),
+            ("fooba", "Zm9vYmE"),
+            ("foobar", "Zm9vYmFy"),
+        ] {
+            assert_eq!(base(m.as_bytes(), 64), o);
+        }
+        assert_eq!(base(&[0xfb, 0xff], 64), "-_8");
+        for r in 2..=36 {
+            assert_eq!(base(&[], r), "");
+        }
+    }
+
+    /// Every base from 2 to 36 against plain integer arithmetic, on values of up to 16 bytes.
+    #[test]
+    fn bases_match_integers() {
+        let h = hash(b"abc", 400);
+        for (i, r) in (0..384).flat_map(|i| (2..=36).map(move |r| (i, r))) {
+            let n = i % 17;
+            let mut b = h[i..i + n].to_vec();
+            b[..n.min(i % 5)].fill(0);
+            let (mut v, mut m, mut o) = (0, 0, vec![]);
+            for &x in &b {
+                (v, m) = (v << 8 | x as u128, m << 8 | 255);
+            }
+            while m > 0 {
+                o.push(char::from_digit((v % r as u128) as u32, r).unwrap());
+                (v, m) = (v / r as u128, m / r as u128);
+            }
+            let o: String = o.iter().rev().collect();
+            assert_eq!(base(&b, r), o, "{b:?} in base {r}");
+        }
+    }
+
+    #[test]
+    fn bad_bases_and_long_inputs_are_refused() {
+        use std::panic::catch_unwind;
+        for r in [0, 1, 37, 63, 65] {
+            assert!(catch_unwind(|| base(b"abc", r)).is_err(), "base {r}");
+        }
+        assert!(catch_unwind(|| base(&[1; 1025], 10)).is_err());
+        assert_eq!(base(&[1; 1024], 10).len(), 2467);
+        assert_eq!(base(&[1; 1024], 3).len(), 5169);
+        assert_eq!(base(&[1; 1025], 8).len(), 2734);
+        assert_eq!(base(&[1; 1025], 16).len(), 2050);
+        assert_eq!(base(&[1; 4096], 64).len(), 5462);
     }
 
     #[test]

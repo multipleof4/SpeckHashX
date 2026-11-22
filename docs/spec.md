@@ -103,6 +103,35 @@ hash     = the first n bytes of block[0] ‖ block[1] ‖ block[2] ‖ …
 
 With `n = 0` the hash is empty.
 
+## Text
+
+The hash is `n` bytes. Its text in base `r` is defined for `r` from 2 to 36, and for `r = 64`.
+
+### Bases 2 to 36
+
+The bytes are read as one number `v`, big-endian: the first byte holds the highest 8 bits.
+`v` is written in base `r`, highest digit first, in the digits `0` to `9` then `a` to `z`.
+It gets as many digits as the largest hash of that length, `256ⁿ - 1`, needs, so a smaller `v` starts with zeros:
+
+```
+v, m, text = the hash as a number, 256ⁿ - 1, ""
+
+while m > 0:
+    text = digit(v mod r) ‖ text
+    v, m = ⌊v / r⌋, ⌊m / r⌋
+```
+
+- Base 16 is the usual hex: two digits for each byte, in the order of the bytes.
+- Every base writes the same number, so the text in one base converts to the text in another, leading zeros aside.
+- Base 32 is that number in base 32, not the Base32 of [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648).
+- With `n = 0` the text is empty.
+
+The words inside the hash are little-endian; the text is big-endian so that it matches the hex.
+
+### Base 64
+
+Base 64 is `base64url` from section 5 of [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648), without the `=` padding.
+
 ## Limits
 
 - `L` is below 2¹²⁶, so the count never reaches the bits of `C` and `LAST`.
@@ -123,6 +152,8 @@ The limits of the crate and the npm package are in [output-length.md](output-len
 Python, written from this page. It reproduces every test vector below and in the crate's tests.
 
 ```python
+import base64
+
 M = 2**64 - 1
 IV = int.from_bytes(b"SHX/904928916087", "little")
 LAST, C = 1 << 127, 1 << 126
@@ -148,6 +179,13 @@ def shx(m, n):
         k, x = int.from_bytes(c, "little"), h ^ 16 * j ^ LAST * (j == q)
         h, g = E(k, g, x) ^ x, E(k, g, x ^ C) ^ x ^ C
     return b"".join(E(h, g, j).to_bytes(16, "little") for j in range(-(-n // 16)))[:n]
+
+
+def text(h, r):
+    if r == 64: return base64.urlsafe_b64encode(h).decode().rstrip("=")
+    v, m, o = int.from_bytes(h, "big"), 256 ** len(h) - 1, ""
+    while m: v, m, o = v // r, m // r, "0123456789abcdefghijklmnopqrstuvwxyz"[v % r] + o
+    return o
 ```
 
 <img src="https://vibegif.direct-img.link/check/done.webp" width="64" align="right" alt="A check mark drawing itself in a badge">
@@ -192,6 +230,32 @@ h        3adda8807352f6863e424d0920d093fc
 g        86f3c8ea60891785edaa97f1af989859
 
 hash     b8c0dc3da2049a432cce4b3a4de9674431c283031eb63924a1a74c9f4d78c977a8aabdf8cd9a0ff4
+```
+
+As text, the hash of `abc` with `n = 32`:
+
+```
+base 10  112999691306956569769269184981788655759217413943854614658490461780486682220275
+base 16  f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3
+base 32  1uejhs63e9klmpulo1m2aggrtbmu4uepkrd988mftjt1hphot5nj
+base 36  685qrcbn2jal82oppuwq48513j85gc1pqczm0niqxoyejmijub
+base 64  -dOPDDcmlbZ9XAbCVCG-rt4nnZptqUIs_s-hjmOOlvM
+```
+
+The hash of the empty message with `n = 32`, which starts with a zero in both bases:
+
+```
+base 10  015979212887220042755496585023260168943665753206110443921945613077242631779095
+base 36  0vp4xr6nktgf2khkk0szu4la2ak25np163qt437hvy1sj6ls0n
+```
+
+The hash of `abc` with `n = 1`, the byte `b3`:
+
+```
+base 2   10110011
+base 10  179
+base 36  4z
+base 64  sw
 ```
 
 More hashes are in the [README](README.md#test-vectors) and in the tests of `src/lib.rs`.

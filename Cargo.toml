@@ -1,6 +1,6 @@
 [package]
 name = "speckhashx"
-version = "1.1.0"
+version = "1.2.0"
 edition = "2024"
 rust-version = "1.85"
 description = "Variable-output hash built from Speck128/256 (Hirose double-block mode). Experimental, unreviewed."

@@ -49,3 +49,7 @@ Ask for the length you want; cutting a longer hash down does not give the shorte
 
 The Rust crate takes any length that fits in memory.
 The npm package accepts up to 2³⁰ bytes (about 1 GB).
+
+As text, a hash of any length can be written in base 2, 4, 8, 16, 32 and 64.
+The other bases take a hash of up to 1,024 bytes: writing them is four times the work for twice the length.
+More on this is in [base.md](base.md#speed).

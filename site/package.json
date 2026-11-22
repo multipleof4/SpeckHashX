@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "speckhashx": "1.1.*"
+    "speckhashx": "1.2.*"
   },
   "devDependencies": {
     "vite": "8.3.*"

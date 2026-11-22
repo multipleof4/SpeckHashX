@@ -12,9 +12,13 @@ One Rust source produces both the Rust crate and the WebAssembly npm package.
 [Rust](https://crates.io/crates/speckhashx) (`cargo add speckhashx`):
 
 ```rust
-let h = speckhashx::hash(b"abc", 32); // Vec<u8> of 32 bytes
+use speckhashx::{Hasher, base, hash};
 
-let mut s = speckhashx::Hasher::new(32);
+let h = hash(b"abc", 32); // Vec<u8> of 32 bytes
+base(&h, 16);             // "f9d38f0c372695b6…", hex
+base(&h, 36);             // "685qrcbn2jal82op…"
+
+let mut s = Hasher::new(32);
 s.update(b"ab").update(b"c");
 assert_eq!(s.finalize(), h);
 ```
@@ -22,19 +26,28 @@ assert_eq!(s.finalize(), h);
 [JavaScript](https://www.npmjs.com/package/speckhashx) (`npm i speckhashx`; works in Node, Bun and browsers):
 
 ```js
-import { hash, hex, Hasher } from 'speckhashx'
+import { shx, Hasher } from 'speckhashx'
 
-hex('abc')        // 'f9d38f0c372695b6…', 32 bytes by default
-hex('abc', 16)    // 'dbfecc39d9de1f99…', 16 bytes
-hash(bytes, 64)   // Uint8Array of 64 bytes
-new Hasher(32).update('ab').update('c').digest()
+shx('abc')             // the 32 bytes of the hash, a Uint8Array
+shx('abc').hex()       // 'f9d38f0c372695b6…'
+shx('abc').base(36)    // '685qrcbn2jal82op…'
+shx('abc', 16).hex()   // 'dbfecc39d9de1f99…', 16 bytes
+shx(bytes, 64)         // 64 bytes
+new Hasher(32).update('ab').update('c').digest().base(64)
 ```
 
-The number is the output length in bytes; in JavaScript it is optional and defaults to 32.
+The number after the message is the output length in bytes; in JavaScript it is optional and defaults to 32.
 
 Strings are hashed as UTF-8, and an `ArrayBuffer`, typed array or `DataView` as its bytes;
 anything else throws. Hashes of different output lengths are unrelated:
 a 16-byte hash is not the start of the 32-byte hash of the same message.
+
+`base` takes 2 to 36, or 64. Bases 2 to 36 write the hash as one number in the digits `0-9a-z`,
+so 16 is hex and 10 is decimal; 64 is URL-safe base64 without padding.
+Lengths, byte order and speed are in [base.md](https://github.com/multipleof4/SpeckHashX/blob/main/docs/base.md);
+the exact rules are in the [specification](https://github.com/multipleof4/SpeckHashX/blob/main/docs/spec.md#text).
+
+Before version 1.2.0 the npm package had `hash(d, n)` and `hex(d, n)`; they are now `shx(d, n)` and `shx(d, n).hex()`.
 
 ## Test vectors
 
@@ -46,6 +59,8 @@ Output is 32 bytes unless noted.
 | `abc` | `f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3` |
 | `abc`, 16-byte output | `dbfecc39d9de1f993d00a90030e89294` |
 | `The quick brown fox jumps over the lazy dog` | `edb6137d9032d6a8e607754a0a29e18702b578d512d119a9f249f5bb4f6ac353` |
+| `abc`, in base 36 | `685qrcbn2jal82oppuwq48513j85gc1pqczm0niqxoyejmijub` |
+| `abc`, in base 64 | `-dOPDDcmlbZ9XAbCVCG-rt4nnZptqUIs_s-hjmOOlvM` |
 
 ## License
 
