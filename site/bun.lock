@@ -5,7 +5,7 @@
     "": {
       "name": "speckhashx-site",
       "dependencies": {
-        "speckhashx": "1.2.*",
+        "speckhashx": "1.3.*",
       },
       "devDependencies": {
         "vite": "8.3.*",
@@ -101,7 +101,7 @@
 
     "source-map-js": ["source-map-js@1.2.2", "", {}, "sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw=="],
 
-    "speckhashx": ["speckhashx@1.2.0", "", {}, "sha512-BIJGY9xlTnVIjIxyB6BiW+ynF5CtH9B28Xa8yUm/m931Tp6yjPLMC/LDp8VKCZNq3qs2pd05zhRZ6/XKMAQhjg=="],
+    "speckhashx": ["speckhashx@1.3.0", "", {}, "sha512-WZOzagtgtIeOfdnyic6c6Me0gnFYtpTzqZuwZ7yANieihMAGsA0eC2/+HxRDlU47TlwxFqUC7yVDv/0edm5AWg=="],
 
     "tinyglobby": ["tinyglobby@0.2.17", "", { "dependencies": { "fdir": "^6.5.0", "picomatch": "^4.0.4" } }, "sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g=="],
 

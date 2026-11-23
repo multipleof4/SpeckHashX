@@ -41,9 +41,9 @@ This is the byte order of the [Speck implementation guide](https://nsacyber.gith
 In it, the Speck128/256 test vector from the paper reads:
 
 ```
-key         000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
-plaintext   706f6f6e65722e20496e2074686f7365
-ciphertext  438f189c8db4ee4e3ef5c00504010941
+key         000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F
+plaintext   706F6F6E65722E20496E2074686F7365
+ciphertext  438F189C8DB4EE4E3EF5C00504010941
 ```
 
 <img src="https://vibegif.direct-img.link/clock/tick.webp" width="64" align="right" alt="An alarm clock ticking">
@@ -52,7 +52,7 @@ ciphertext  438f189c8db4ee4e3ef5c00504010941
 
 | Name | Value |
 |---|---|
-| `IV` | the 16 ASCII bytes `SHX/904928916087` as a word, `0x3738303631393832393430392f584853` |
+| `IV` | the 16 ASCII bytes `SHX/904928916087` as a word, `0x3738303631393832393430392F584853` |
 | `LAST` | 2¹²⁷ |
 | `C` | 2¹²⁶ |
 
@@ -105,12 +105,13 @@ With `n = 0` the hash is empty.
 
 ## Text
 
-The hash is `n` bytes. Its text in base `r` is defined for `r` from 2 to 36, and for `r = 64`.
+The hash is `n` bytes. Its text in base `r` is defined for `r` from 2 to 62, and for `r = 64`.
 
-### Bases 2 to 36
+### Bases 2 to 62
 
 The bytes are read as one number `v`, big-endian: the first byte holds the highest 8 bits.
-`v` is written in base `r`, highest digit first, in the digits `0` to `9` then `a` to `z`.
+`v` is written in base `r`, highest digit first, in the digits `0` to `9`, then `A` to `Z`, then `a` to `z`:
+`A` is 10 and `a` is 36.
 It gets as many digits as the largest hash of that length, `256ⁿ - 1`, needs, so a smaller `v` starts with zeros:
 
 ```
@@ -121,12 +122,9 @@ while m > 0:
     v, m = ⌊v / r⌋, ⌊m / r⌋
 ```
 
-- Base 16 is the usual hex: two digits for each byte, in the order of the bytes.
-- Every base writes the same number, so the text in one base converts to the text in another, leading zeros aside.
+- Base 16 is hex in uppercase: two digits for each byte, in the order of the bytes.
 - Base 32 is that number in base 32, not the Base32 of [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648).
 - With `n = 0` the text is empty.
-
-The words inside the hash are little-endian; the text is big-endian so that it matches the hex.
 
 ### Base 64
 
@@ -157,6 +155,7 @@ import base64
 M = 2**64 - 1
 IV = int.from_bytes(b"SHX/904928916087", "little")
 LAST, C = 1 << 127, 1 << 126
+D = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 rol = lambda v, r: (v << r | v >> 64 - r) & M
 ror = lambda v, r: rol(v, 64 - r)
 
@@ -184,7 +183,7 @@ def shx(m, n):
 def text(h, r):
     if r == 64: return base64.urlsafe_b64encode(h).decode().rstrip("=")
     v, m, o = int.from_bytes(h, "big"), 256 ** len(h) - 1, ""
-    while m: v, m, o = v // r, m // r, "0123456789abcdefghijklmnopqrstuvwxyz"[v % r] + o
+    while m: v, m, o = v // r, m // r, D[v % r] + o
     return o
 ```
 
@@ -198,47 +197,49 @@ The empty message, `n = 32`:
 
 ```
 chunk 0  00000000000000000000000000000000   count LAST
-h        a16feaa95237f043c4e8d8eca66edeed
-g        6c70c50822e7bbb24ec9e06d71929c47
+h        A16FEAA95237F043C4E8D8ECA66EDEED
+g        6C70C50822E7BBB24EC9E06D71929C47
 
-hash     2353e9fb3e8415144a2ba616b57448957d0a72c4003fd759e6bf96e6a3b57317
+hash     2353E9FB3E8415144A2BA616B57448957D0A72C4003FD759E6BF96E6A3B57317
 ```
 
 `abc`, `n = 32`:
 
 ```
 chunk 0  61626300000000000000000000000003   count LAST
-h        30a537040c1c520f09908412b9c9b2e5
-g        9ec14fdb97954ce81cc4542afd0e3a03
+h        30A537040C1C520F09908412B9C9B2E5
+g        9EC14FDB97954CE81CC4542AFD0E3A03
 
-hash     f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3
+hash     F9D38F0C372695B67D5C06C25421BEAEDE279D9A6DA9422CFECFA18E638E96F3
 ```
 
 The 33 bytes `00 01 02 … 20`, `n = 40`:
 
 ```
-chunk 0  000102030405060708090a0b0c0d0e0f   count 0
-h        9de36bdab0a07b4ca4abc294e8e8e531
-g        79254459af53e5edaef867b058fd34bd
+chunk 0  000102030405060708090A0B0C0D0E0F   count 0
+h        9DE36BDAB0A07B4CA4ABC294E8E8E531
+g        79254459AF53E5EDAEF867B058FD34BD
 
-chunk 1  101112131415161718191a1b1c1d1e1f   count 16
-h        c7ca0083d8c5928b29abc8fe222de5d2
-g        bfef48e92833ed6275617f784db8d47c
+chunk 1  101112131415161718191A1B1C1D1E1F   count 16
+h        C7CA0083D8C5928B29ABC8FE222DE5D2
+g        BFEF48E92833ED6275617F784DB8D47C
 
 chunk 2  20000000000000000000000000000001   count 32 + LAST
-h        3adda8807352f6863e424d0920d093fc
-g        86f3c8ea60891785edaa97f1af989859
+h        3ADDA8807352F6863E424D0920D093FC
+g        86F3C8EA60891785EDAA97F1AF989859
 
-hash     b8c0dc3da2049a432cce4b3a4de9674431c283031eb63924a1a74c9f4d78c977a8aabdf8cd9a0ff4
+hash     B8C0DC3DA2049A432CCE4B3A4DE9674431C283031EB63924A1A74C9F4D78C977A8AABDF8CD9A0FF4
 ```
 
 As text, the hash of `abc` with `n = 32`:
 
 ```
 base 10  112999691306956569769269184981788655759217413943854614658490461780486682220275
-base 16  f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3
-base 32  1uejhs63e9klmpulo1m2aggrtbmu4uepkrd988mftjt1hphot5nj
-base 36  685qrcbn2jal82oppuwq48513j85gc1pqczm0niqxoyejmijub
+base 16  F9D38F0C372695B67D5C06C25421BEAEDE279D9A6DA9422CFECFA18E638E96F3
+base 32  1UEJHS63E9KLMPULO1M2AGGRTBMU4UEPKRD988MFTJT1HPHOT5NJ
+base 36  685QRCBN2JAL82OPPUWQ48513J85GC1PQCZM0NIQXOYEJMIJUB
+base 37  1N6DHPaAZXaYRF5CZ40A6490WXXANKDRB976MHT6UKYVS64UZZ
+base 62  xEySOeSw03P6yQX1jTkBhtsGxk21oAxPxH4xCtxpHGN
 base 64  -dOPDDcmlbZ9XAbCVCG-rt4nnZptqUIs_s-hjmOOlvM
 ```
 
@@ -246,15 +247,17 @@ The hash of the empty message with `n = 32`, which starts with a zero in both ba
 
 ```
 base 10  015979212887220042755496585023260168943665753206110443921945613077242631779095
-base 36  0vp4xr6nktgf2khkk0szu4la2ak25np163qt437hvy1sj6ls0n
+base 36  0VP4XR6NKTGF2KHKK0SZU4LA2AK25NP163QT437HVY1SJ6LS0N
 ```
 
-The hash of `abc` with `n = 1`, the byte `b3`:
+The hash of `abc` with `n = 1`, the byte `B3`:
 
 ```
 base 2   10110011
 base 10  179
-base 36  4z
+base 16  B3
+base 36  4Z
+base 62  2t
 base 64  sw
 ```
 

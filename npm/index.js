@@ -9,7 +9,7 @@ const reg = new FinalizationRegistry(x.shx_drop)
 class Hash extends Uint8Array {
   base(r) {
     const n = this.length
-    if (!Number.isInteger(r) || r != 64 && (r < 2 || r > 36)) throw RangeError('base must be an integer from 2 to 36, or 64')
+    if (!Number.isInteger(r) || r != 64 && (r < 2 || r > 62)) throw RangeError('base must be an integer from 2 to 62, or 64')
     if (r & r - 1 && n > 1024) throw RangeError('bases other than 2, 4, 8, 16, 32 and 64 take at most 1024 bytes')
     const i = x.shx_alloc(n)
     mem(i, n).set(this)
@@ -66,7 +66,7 @@ export class Hasher {
   }
 }
 
-// One call releases its hasher on the way out, so a loop of them does not wait for the garbage collector.
+// Frees its hasher on the way out; a `Hasher` is left to the garbage collector.
 export const shx = (d, n = 32) => {
   const h = make(n)
   try {

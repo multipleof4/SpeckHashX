@@ -103,6 +103,8 @@ pub fn hash(m: &[u8], n: usize) -> Vec<u8> {
 /// Longest input, in bytes, that `base` takes in a base other than 2, 4, 8, 16, 32 and 64.
 const MAX: usize = 1024;
 const B64: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+/// The digits of bases 2 to 62: `A` is 10 and `a` is 36.
+const DIGITS: &[u8] = b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 /// Digits of the big-endian number `b` in base `r`, lowest first, without leading zeros.
 fn digits(b: &[u8], r: u64) -> Vec<u8> {
@@ -140,12 +142,12 @@ fn digits(b: &[u8], r: u64) -> Vec<u8> {
 
 /// `b` as text in base `r`.
 ///
-/// Bases 2 to 36 give `b` as one big-endian number in the digits `0-9a-z`, with as many digits as
-/// the largest value of that length needs, so base 16 is the usual hex. Base 64 is base64url with no `=` at the end.
+/// Bases 2 to 62 give `b` as one big-endian number in the digits `0-9A-Za-z`, with as many digits as
+/// the largest value of that length needs, so base 16 is hex in uppercase. Base 64 is base64url with no `=` at the end.
 ///
 /// # Panics
 ///
-/// If `r` is not 2 to 36 or 64, or if `b` is over 1,024 bytes in a base other than 2, 4, 8, 16, 32 and 64.
+/// If `r` is not 2 to 62 or 64, or if `b` is over 1,024 bytes in a base other than 2, 4, 8, 16, 32 and 64.
 pub fn base(b: &[u8], r: u32) -> String {
     if r == 64 {
         return b
@@ -156,7 +158,7 @@ pub fn base(b: &[u8], r: u32) -> String {
             })
             .collect();
     }
-    assert!((2..=36).contains(&r), "base must be 2 to 36, or 64");
+    assert!((2..=62).contains(&r), "base must be 2 to 62, or 64");
     let mut o = vec![];
     if r.is_power_of_two() {
         // A digit is a whole number of bits: take them from the low end.
@@ -178,7 +180,7 @@ pub fn base(b: &[u8], r: u32) -> String {
     }
     o.iter()
         .rev()
-        .map(|&c| char::from_digit(c as u32, r).unwrap())
+        .map(|&c| DIGITS[c as usize] as char)
         .collect()
 }
 
@@ -231,17 +233,16 @@ mod wasm {
 mod tests {
     use super::*;
 
-    fn hex(b: &[u8]) -> String {
-        b.iter().map(|v| format!("{v:02x}")).collect()
-    }
-
     /// Test vector from the Speck paper, in the byte order of the Speck implementation guide.
     #[test]
     fn speck128_256() {
         let k: [u8; 32] = core::array::from_fn(|i| i as u8);
         let [a, b] = [&k[..16], &k[16..]].map(|v| u128::from_le_bytes(v.try_into().unwrap()));
         let c = enc(a, b, [u128::from_le_bytes(*b"pooner. In those")])[0];
-        assert_eq!(hex(&c.to_le_bytes()), "438f189c8db4ee4e3ef5c00504010941");
+        assert_eq!(
+            base(&c.to_le_bytes(), 16),
+            "438F189C8DB4EE4E3EF5C00504010941"
+        );
     }
 
     /// Answers from an independent Python implementation of the same design.
@@ -252,55 +253,55 @@ mod tests {
             (
                 &b""[..],
                 32,
-                "2353e9fb3e8415144a2ba616b57448957d0a72c4003fd759e6bf96e6a3b57317",
+                "2353E9FB3E8415144A2BA616B57448957D0A72C4003FD759E6BF96E6A3B57317",
             ),
             (
                 b"abc",
                 32,
-                "f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3",
+                "F9D38F0C372695B67D5C06C25421BEAEDE279D9A6DA9422CFECFA18E638E96F3",
             ),
-            (b"abc", 16, "dbfecc39d9de1f993d00a90030e89294"),
+            (b"abc", 16, "DBFECC39D9DE1F993D00A90030E89294"),
             (
                 b"The quick brown fox jumps over the lazy dog",
                 32,
-                "edb6137d9032d6a8e607754a0a29e18702b578d512d119a9f249f5bb4f6ac353",
+                "EDB6137D9032D6A8E607754A0A29E18702B578D512D119A9F249F5BB4F6AC353",
             ),
-            (b"abc", 1, "b3"),
+            (b"abc", 1, "B3"),
             (
                 b"abc",
                 100,
-                "7a41bdac404270a33a1f3c45f868f67dc3dba424aa723eec919f414f89d6d04491b61a19876240db1cb5689f899379e1\
-                 6540aad99d5239df6c78e79a9f62385f99990fa0f238cf3e32f8d4e4f9018c9466626cae2a38066f33bb27ece2261444\
+                "7A41BDAC404270A33A1F3C45F868F67DC3DBA424AA723EEC919F414F89D6D04491B61A19876240DB1CB5689F899379E1\
+                 6540AAD99D5239DF6C78E79A9F62385F99990FA0F238CF3E32F8D4E4F9018C9466626CAE2A38066F33BB27ECE2261444\
                  11026525",
             ),
             (
                 &[0; 16],
                 32,
-                "bd4938adba89371630c40ed5ade8ea29f4c1c366c0f26ea17a6dac4074e4cbad",
+                "BD4938ADBA89371630C40ED5ADE8EA29F4C1C366C0F26EA17A6DAC4074E4CBAD",
             ),
             (
                 &[0; 17],
                 32,
-                "8424162ee390487cdb4e6e468a923363ea63bb89ea37b254b73bf227eae7fb4f",
+                "8424162EE390487CDB4E6E468A923363EA63BB89EA37B254B73BF227EAE7FB4F",
             ),
             (
                 &p[..32],
                 32,
-                "1260b1178d37c0d9477cd98d710c9e8ba0ce350786af0f8211a15a1991559ee2",
+                "1260B1178D37C0D9477CD98D710C9E8BA0CE350786AF0F8211A15A1991559EE2",
             ),
             (
                 &p[..33],
                 64,
-                "e3a90c0dce6d78767691510c890a40cf2e2ce8933729baf072f1ed3e7bfcd523\
-                 45b9a8d1b2b0c7089405e5921ff9b8102150844d8a84cac92857eff650982d44",
+                "E3A90C0DCE6D78767691510C890A40CF2E2CE8933729BAF072F1ED3E7BFCD523\
+                 45B9A8D1B2B0C7089405E5921FF9B8102150844D8A84CAC92857EFF650982D44",
             ),
             (
                 &p,
                 32,
-                "8a0d7524c6ee6ef86b6cfd7de2727ede7b74dc8c32430626c892b20380ad5427",
+                "8A0D7524C6EE6EF86B6CFD7DE2727EDE7B74DC8C32430626C892B20380AD5427",
             ),
         ] {
-            assert_eq!(hex(&hash(m, n)), o, "{} bytes -> {n}", m.len());
+            assert_eq!(base(&hash(m, n), 16), o, "{} bytes -> {n}", m.len());
         }
     }
 
@@ -325,19 +326,29 @@ mod tests {
             ),
             (
                 16,
-                "f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3",
+                "F9D38F0C372695B67D5C06C25421BEAEDE279D9A6DA9422CFECFA18E638E96F3",
             ),
-            (32, "1uejhs63e9klmpulo1m2aggrtbmu4uepkrd988mftjt1hphot5nj"),
-            (36, "685qrcbn2jal82oppuwq48513j85gc1pqczm0niqxoyejmijub"),
+            (32, "1UEJHS63E9KLMPULO1M2AGGRTBMU4UEPKRD988MFTJT1HPHOT5NJ"),
+            (36, "685QRCBN2JAL82OPPUWQ48513J85GC1PQCZM0NIQXOYEJMIJUB"),
+            (37, "1N6DHPaAZXaYRF5CZ40A6490WXXANKDRB976MHT6UKYVS64UZZ"),
+            (58, "GlCZv1U9WjFaWgqO4ht5kjtDePnC7QvhQah3ks5ruSah"),
+            (62, "xEySOeSw03P6yQX1jTkBhtsGxk21oAxPxH4xCtxpHGN"),
             (64, "-dOPDDcmlbZ9XAbCVCG-rt4nnZptqUIs_s-hjmOOlvM"),
         ] {
             assert_eq!(base(&h, r), o, "base {r}");
         }
         assert_eq!(
             base(&hash(b"abc", 100), 36),
-            "6srhq96um6obb88d2x46anh0xzypwbkemsemwdwd2lnt3olknhi2xr2o93lh2xh7m8rwcajll5wesmrimhez8hfqxsherdi2\
-             8ilxlp34e234lm6t1jbavyn9oao46f67eziuj6g35x0ik033rjttcq6z2g5"
+            "6SRHQ96UM6OBB88D2X46ANH0XZYPWBKEMSEMWDWD2LNT3OLKNHI2XR2O93LH2XH7M8RWCAJLL5WESMRIMHEZ8HFQXSHERDI2\
+             8ILXLP34E234LM6T1JBAVYN9OAO46F67EZIUJ6G35X0IK033RJTTCQ6Z2G5"
         );
+        assert_eq!(
+            base(&hash(b"abc", 100), 62),
+            "26IQD9WPCU4esor7lHUVj1xsEcBIMefYr4oRlQPS5EB0wPWGcIgBMnDi277c1F5o4rp7jyX2qVb0g3gKvbzlpXEYx5BH44htA\
+             5JBsGdZZV7xpt6nN5T9WP0U17s6Ni9jlr56SSj"
+        );
+        assert_eq!(base(&hash(b"abc", 16), 62), "6h7lH5g2lldpEWa6X8YesG");
+        assert_eq!(base(&hash(b"abc", 1), 62), "2t");
         // Leading zeros stay.
         for (m, n, r, o) in [
             (
@@ -350,7 +361,7 @@ mod tests {
                 b"",
                 32,
                 36,
-                "0vp4xr6nktgf2khkk0szu4la2ak25np163qt437hvy1sj6ls0n",
+                "0VP4XR6NKTGF2KHKK0SZU4LA2AK25NP163QT437HVY1SJ6LS0N",
             ),
             (b"abc", 5, 3, "00201121220001201110210221"),
             (b"abc", 5, 7, "020555203250446"),
@@ -373,16 +384,20 @@ mod tests {
             assert_eq!(base(m.as_bytes(), 64), o);
         }
         assert_eq!(base(&[0xfb, 0xff], 64), "-_8");
-        for r in 2..=36 {
+        for r in 2..=62 {
             assert_eq!(base(&[], r), "");
         }
     }
 
-    /// Every base from 2 to 36 against plain integer arithmetic, on values of up to 16 bytes.
+    /// Every base from 2 to 62 against plain integer arithmetic, on values of up to 16 bytes.
     #[test]
     fn bases_match_integers() {
-        let h = hash(b"abc", 400);
-        for (i, r) in (0..384).flat_map(|i| (2..=36).map(move |r| (i, r))) {
+        let (h, d) = (
+            hash(b"abc", 400),
+            ('0'..='9').chain('A'..='Z').chain('a'..='z'),
+        );
+        let d: Vec<char> = d.collect();
+        for (i, r) in (0..384).flat_map(|i| (2..=62).map(move |r| (i, r))) {
             let n = i % 17;
             let mut b = h[i..i + n].to_vec();
             b[..n.min(i % 5)].fill(0);
@@ -391,7 +406,7 @@ mod tests {
                 (v, m) = (v << 8 | x as u128, m << 8 | 255);
             }
             while m > 0 {
-                o.push(char::from_digit((v % r as u128) as u32, r).unwrap());
+                o.push(d[(v % r as u128) as usize]);
                 (v, m) = (v / r as u128, m / r as u128);
             }
             let o: String = o.iter().rev().collect();
@@ -402,7 +417,7 @@ mod tests {
     #[test]
     fn bad_bases_and_long_inputs_are_refused() {
         use std::panic::catch_unwind;
-        for r in [0, 1, 37, 63, 65] {
+        for r in [0, 1, 63, 65] {
             assert!(catch_unwind(|| base(b"abc", r)).is_err(), "base {r}");
         }
         assert!(catch_unwind(|| base(&[1; 1025], 10)).is_err());

@@ -15,8 +15,8 @@ One Rust source produces both the Rust crate and the WebAssembly npm package.
 use speckhashx::{Hasher, base, hash};
 
 let h = hash(b"abc", 32); // Vec<u8> of 32 bytes
-base(&h, 16);             // "f9d38f0c372695b6…", hex
-base(&h, 36);             // "685qrcbn2jal82op…"
+base(&h, 16);             // "F9D38F0C372695B6…", hex
+base(&h, 62);             // "xEySOeSw03P6yQX1…"
 
 let mut s = Hasher::new(32);
 s.update(b"ab").update(b"c");
@@ -29,9 +29,9 @@ assert_eq!(s.finalize(), h);
 import { shx, Hasher } from 'speckhashx'
 
 shx('abc')             // the 32 bytes of the hash, a Uint8Array
-shx('abc').hex()       // 'f9d38f0c372695b6…'
-shx('abc').base(36)    // '685qrcbn2jal82op…'
-shx('abc', 16).hex()   // 'dbfecc39d9de1f99…', 16 bytes
+shx('abc').hex()       // 'F9D38F0C372695B6…'
+shx('abc').base(62)    // 'xEySOeSw03P6yQX1…'
+shx('abc', 16).hex()   // 'DBFECC39D9DE1F99…', 16 bytes
 shx(bytes, 64)         // 64 bytes
 new Hasher(32).update('ab').update('c').digest().base(64)
 ```
@@ -42,7 +42,7 @@ Strings are hashed as UTF-8, and an `ArrayBuffer`, typed array or `DataView` as 
 anything else throws. Hashes of different output lengths are unrelated:
 a 16-byte hash is not the start of the 32-byte hash of the same message.
 
-`base` takes 2 to 36, or 64. `hex` is base 16.
+`base` takes 2 to 62, or 64. `hex` is base 16.
 
 ## Test vectors
 
@@ -50,11 +50,12 @@ Output is 32 bytes unless noted.
 
 | Message | Hash |
 |---|---|
-| empty | `2353e9fb3e8415144a2ba616b57448957d0a72c4003fd759e6bf96e6a3b57317` |
-| `abc` | `f9d38f0c372695b67d5c06c25421beaede279d9a6da9422cfecfa18e638e96f3` |
-| `abc`, 16-byte output | `dbfecc39d9de1f993d00a90030e89294` |
-| `The quick brown fox jumps over the lazy dog` | `edb6137d9032d6a8e607754a0a29e18702b578d512d119a9f249f5bb4f6ac353` |
-| `abc`, in base 36 | `685qrcbn2jal82oppuwq48513j85gc1pqczm0niqxoyejmijub` |
+| empty | `2353E9FB3E8415144A2BA616B57448957D0A72C4003FD759E6BF96E6A3B57317` |
+| `abc` | `F9D38F0C372695B67D5C06C25421BEAEDE279D9A6DA9422CFECFA18E638E96F3` |
+| `abc`, 16-byte output | `DBFECC39D9DE1F993D00A90030E89294` |
+| `The quick brown fox jumps over the lazy dog` | `EDB6137D9032D6A8E607754A0A29E18702B578D512D119A9F249F5BB4F6AC353` |
+| `abc`, in base 36 | `685QRCBN2JAL82OPPUWQ48513J85GC1PQCZM0NIQXOYEJMIJUB` |
+| `abc`, in base 62 | `xEySOeSw03P6yQX1jTkBhtsGxk21oAxPxH4xCtxpHGN` |
 | `abc`, in base 64 | `-dOPDDcmlbZ9XAbCVCG-rt4nnZptqUIs_s-hjmOOlvM` |
 
 ## Docs
