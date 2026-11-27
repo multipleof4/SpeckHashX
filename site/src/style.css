@@ -18,7 +18,7 @@
   --dim: light-dark(#666a73, #8d909a);
   --line: light-dark(#d8d4c8, #2a2d35);
   --card: light-dark(#fffefb, #15171c);
-  --hot: light-dark(#a85600, #f5b74e);
+  --hot: light-dark(#006aa8, #4fb3e8);
   font: 16px/1.6 Monostain, ui-monospace, SFMono-Regular, Menlo, monospace;
   background: var(--bg);
   color: var(--fg);
@@ -72,17 +72,17 @@ label, small, .use span { color: var(--dim); font-size: .85rem; }
 label b { color: var(--fg); }
 label:not(:first-child) { margin-top: .5rem; }
 
-textarea {
-  width: 100%;
+textarea, select {
   padding: .75rem .9rem;
   font: inherit;
   color: inherit;
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 10px;
-  resize: vertical;
 }
-textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--hot); outline-offset: 2px; }
+textarea { width: 100%; resize: vertical; }
+select { justify-self: start; padding: .4rem .7rem; cursor: pointer; }
+textarea:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--hot); outline-offset: 2px; }
 input[type=range] { width: 100%; margin: 0; accent-color: var(--hot); }
 
 .out {
@@ -108,7 +108,7 @@ button {
   cursor: pointer;
 }
 .out button { margin-left: auto; }
-button:hover { border-color: var(--hot); }
+button:hover, select:hover { border-color: var(--hot); }
 
 ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .75rem; color: var(--dim); }
 li b { color: var(--fg); }

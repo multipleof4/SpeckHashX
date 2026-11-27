@@ -1,4 +1,4 @@
-<img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="64" align="right" alt="An octopus wiggling its arms">
+<img src="https://vibegif.direct-img.link/mantis/pray.webp" width="64" align="right" alt="A praying mantis">
 
 # Specification
 

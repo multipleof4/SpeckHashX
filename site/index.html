@@ -8,7 +8,7 @@
   <meta property="og:title" content="SpeckHashX">
   <meta property="og:description" content="A hash function with any output length, built from the Speck cipher. Try it in your browser.">
   <link rel="canonical" href="https://speckhashx.pages.dev/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230e0f12'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23f5b74e'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230e0f12'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%234fb3e8'/%3E%3C/svg%3E">
   <link rel="preload" href="/fonts/Monostain-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <script type="module" src="/src/main.js"></script>
 </head>
@@ -16,7 +16,7 @@
   <div id="bg" aria-hidden="true"></div>
   <main>
     <header>
-      <img src="https://vibegif.direct-img.link/octopus/wiggle.webp" width="112" height="112" alt="">
+      <img src="https://vibegif.direct-img.link/mantis/pray.webp" width="112" height="112" alt="">
       <h1>SpeckHash<b>X</b></h1>
       <p>A hash function with any output length, built from the Speck cipher.</p>
     </header>
@@ -26,6 +26,8 @@
       <textarea id="msg" rows="3" spellcheck="false" autocomplete="off">hello</textarea>
       <label for="len">Output length <b id="bytes"></b></label>
       <input id="len" type="range" min="1" max="128" value="32">
+      <label for="base">Base</label>
+      <select id="base"></select>
       <div class="out">
         <code id="out"></code>
         <button id="copy" type="button">Copy</button>
@@ -44,7 +46,7 @@
       <span>Rust</span><code>cargo add speckhashx</code>
     </section>
 
-    <p class="note"><b>Experimental.</b> This design is new and has not been reviewed by anyone.</p>
+    <p class="note"><b>Experimental.</b> This design is new.</p>
 
     <footer>
       <a href="https://github.com/multipleof4/SpeckHashX">GitHub</a>
