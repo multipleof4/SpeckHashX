@@ -27,6 +27,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; }
 b { font-weight: 700; }
+code { font: inherit; }
 
 /* Wallpaper of real hashes, filled in by main.js. */
 #bg {
