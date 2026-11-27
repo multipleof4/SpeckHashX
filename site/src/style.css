@@ -18,7 +18,7 @@
   --dim: light-dark(#666a73, #8d909a);
   --line: light-dark(#d8d4c8, #2a2d35);
   --card: light-dark(#fffefb, #15171c);
-  --hot: light-dark(#3a7a2a, #74c365);
+  --hot: #74c365;
   font: 16px/1.6 Monostain, ui-monospace, SFMono-Regular, Menlo, monospace;
   background: var(--bg);
   color: var(--fg);
